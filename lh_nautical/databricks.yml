@@ -1,0 +1,40 @@
+# This is a Databricks asset bundle definition for lh_nautical.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: lh_nautical
+  uuid: 84e5f64d-5654-4955-8699-fe2abdcde349
+
+include:
+  - resources/*.yml
+
+# Variable declarations. These variables are assigned in the dev/prod targets below.
+variables:
+  catalog_name:
+    description: "Catálogo de destino (pessoal em dev, oficial em prod)" 
+
+targets:
+  dev:
+    # The default target uses 'mode: development' to create a development copy.
+    # - Deployed resources get prefixed with '[dev my_user_name]'
+    # - Any job schedules and triggers are paused by default.
+    # See also https://docs.databricks.com/dev-tools/bundles/deployment-modes.html.
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-a9359a61-6a33.cloud.databricks.com
+    variables:
+      catalog_name: dev_adriano_takata_lh_nautical #ajuste para o seu catálogo dev pessoal (ex: dev_nome_sobrenome_lh_nautical)
+    presets:
+      artifacts_dynamic_version: true
+  prod:
+    mode: production
+    workspace:
+      host: https://dbc-a9359a61-6a33.cloud.databricks.com
+      # We explicitly deploy to /Workspace/Users/adrianostakata@gmail.com to make sure we only have a single copy.
+      root_path: /Workspace/Users/adrianostakata@gmail.com/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: workspace
+      schema: prod
+    permissions:
+      - user_name: adrianostakata@gmail.com
+        level: CAN_MANAGE

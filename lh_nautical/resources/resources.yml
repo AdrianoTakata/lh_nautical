@@ -1,0 +1,42 @@
+resources:
+  jobs:
+    meu_job_de_ingestao:
+      name: "Job Ingestao JDBC"
+      email_notifications:
+        on_failure:
+          - "adrianostakata@gmail.com"
+          #- "time-dados@suaempresa.com" # Você pode colocar mais de um e-mail se quiser
+        # Opcional: se quiser receber e-mail quando o job começar ou terminar com sucesso:
+        # on_start:
+        #   - "seu-email@suaempresa.com"
+        # on_success:
+        #   - "seu-email@suaempresa.com"
+      tasks:
+        - task_key: "Ingestion_SQL_Server"
+          notebook_task:
+            notebook_path: ../src/bronze/ingestion.ipynb
+            base_parameters:
+              catalog_name: ${var.catalog_name}
+              schema: bronze
+              numPartitions: "4"
+      # Definição do ambiente Serverless exigida para Python Tasks
+
+      #environments:
+      #  - environment_key: serverless_env
+      #    spec:
+      #      environment_version: "2"
+            
+            # Se o seu PySpark precisar instalar bibliotecas extras no futuro, faça aqui:
+            # dependencies:
+            #   - pandas==2.1.4
+            #   - requests
+
+      #tasks:
+      #  - task_key: "Executa_script_pyspark"
+          
+          # Configuração da execução do script PySpark
+      #    spark_python_task:
+      #      python_file: ./src/ingestion3.py
+          
+          # OBRIGATÓRIO PARA SERVERLESS: Referência ao ambiente de execução
+      #    environment_key: serverless_env
