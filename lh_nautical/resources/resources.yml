@@ -1,7 +1,7 @@
 resources:
   jobs:
     meu_job_de_ingestao:
-      name: "Job Ingestao JDBC"
+      name: "Job JDBC Ingestion"
       email_notifications:
         on_failure:
           - "adrianostakata@gmail.com"
@@ -12,24 +12,43 @@ resources:
         # on_success:
         #   - "seu-email@suaempresa.com"
       tasks:
-        - task_key: "Ingestion_SQL_Server"
-          notebook_task:
-            notebook_path: ../src/bronze/ingestion.ipynb
-            base_parameters:
-              catalog_name: ${var.catalog_name}
-              schema: bronze
-              numPartitions: "4"
-      # Definição do ambiente Serverless exigida para Python Tasks
+        #- task_key: "Ingestion_SQL_Server"
+        #  notebook_task:
+        #    notebook_path: ../src/bronze/ingestion.ipynb
+        #    base_parameters:
+        #      catalog_name: ${var.catalog_name}
+        #      schema: bronze
+        #      numPartitions: "4"
 
-      #environments:
-      #  - environment_key: serverless_env
-      #    spec:
-      #      environment_version: "2"
+        - task_key: "dbt_transformacao"
+          #depends_on:
+          #  - task_key: "Ingestion_SQL_Server"
+          dbt_task:
+            project_directory: ../lh_nautical_dbt_databricks
+            commands:
+              - "dbt deps"
+              - "dbt run --vars '{\"catalog_name\": \"${var.catalog_name}\", \"schema_name\": \"bronze\"}'"
+              #- "dbt test --vars '{\"catalog_name\": \"${var.catalog_name}\", \"schema_name\": \"bronze\"}'"
+          environment_key: dbt_env
+          
+      environments:
+        #- environment_key: default
+        #  spec:
+        #    environment_version: "3"
+        #    dependencies:
+        #      - pytest
+        - environment_key: dbt_env
+          spec:
+            environment_version: "3"
+            dependencies:
+              - dbt-databricks
+          #  environment_vars:
+          #    DBT_HOST: "{{secrets/dbt_credentials/dbt_host}}"
+          #    DBT_HTTP_PATH: "{{secrets/dbt_credentials/dbt_http_path}}"
+          #    DBT_TOKEN: "{{secrets/dbt_credentials/dbt_token}}"
+
             
-            # Se o seu PySpark precisar instalar bibliotecas extras no futuro, faça aqui:
-            # dependencies:
-            #   - pandas==2.1.4
-            #   - requests
+
 
       #tasks:
       #  - task_key: "Executa_script_pyspark"

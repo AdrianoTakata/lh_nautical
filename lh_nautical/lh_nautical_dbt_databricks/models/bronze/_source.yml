@@ -1,0 +1,29 @@
+sources:
+  - name: slq_server
+    description: Essas são as tabelas extraidas no banco SQL Server
+    schema: bronze
+    tables:
+      - name: addresses
+      - name: attributes
+      - name: brands
+      - name: categories
+      - name: customers
+      - name: employees
+      - name: fiscal_invoices
+      - name: goods_receipt_items
+      - name: goods_receipts
+      - name: locations
+      - name: order_items
+      - name: orders
+      - name: payments
+      - name: product_suppliers
+      - name: product_variants
+      - name: products
+      - name: purchase_order_items
+      - name: purchase_orders
+      - name: return_items
+      - name: returns
+      - name: stock_levels
+      - name: stock_movements
+      - name: suppliers
+      - name: variant_attribute_values

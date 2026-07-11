@@ -12,6 +12,12 @@ variables:
   catalog_name:
     description: "Catálogo de destino (pessoal em dev, oficial em prod)" 
 
+sync:
+  exclude:
+    - "lh_nautical_dbt_databricks/target/**"
+    - "lh_nautical_dbt_databricks/dbt_packages/**"
+    - "lh_nautical_dbt_databricks/logs/**"
+
 targets:
   dev:
     # The default target uses 'mode: development' to create a development copy.
@@ -23,7 +29,7 @@ targets:
     workspace:
       host: https://dbc-a9359a61-6a33.cloud.databricks.com
     variables:
-      catalog_name: dev_adriano_takata_lh_nautical #ajuste para o seu catálogo dev pessoal (ex: dev_nome_sobrenome_lh_nautical)
+      catalog_name: "dev_adriano_takata_lh_nautical" #ajuste para o seu catálogo dev pessoal (ex: dev_nome_sobrenome_lh_nautical)
     presets:
       artifacts_dynamic_version: true
   prod:
