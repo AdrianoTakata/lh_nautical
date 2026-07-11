@@ -8,3 +8,6 @@ scratch/**
 !scratch/README.md
 **/explorations/**
 **/!explorations/README.md
+lh_nautical_dbt_databricks/.env
+lh_nautical_dbt_databricks/profiles.yml
+lh_nautical_dbt_databricks/load_env.ps1
