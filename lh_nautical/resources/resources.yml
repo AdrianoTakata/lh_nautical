@@ -12,17 +12,17 @@ resources:
         # on_success:
         #   - "seu-email@suaempresa.com"
       tasks:
-        #- task_key: "Ingestion_SQL_Server"
-        #  notebook_task:
-        #    notebook_path: ../src/bronze/ingestion.ipynb
-        #    base_parameters:
-        #      catalog_name: ${var.catalog_name}
-        #      schema: bronze
-        #      numPartitions: "4"
+        - task_key: "Ingestion_SQL_Server"
+          notebook_task:
+            notebook_path: ../src/bronze/ingestion.ipynb
+            base_parameters:
+              catalog_name: ${var.catalog_name}
+              schema: bronze
+              numPartitions: "4"
 
-        - task_key: "dbt_transformacao"
-          #depends_on:
-          #  - task_key: "Ingestion_SQL_Server"
+        - task_key: "dbt_transformacao_bronze"
+          depends_on:
+            - task_key: "Ingestion_SQL_Server"
           dbt_task:
             project_directory: ../lh_nautical_dbt_databricks
             commands:
