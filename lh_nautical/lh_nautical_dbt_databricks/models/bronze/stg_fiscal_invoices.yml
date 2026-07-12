@@ -2,9 +2,9 @@ version: 2
 
 models:
   - name: stg_fiscal_invoices
-    description: "Staging table containing cleaned and standardized electronic fiscal invoices (NF-e) data."
+    description: "Staging table containing cleaned and standardized electronic fiscal invoices table (NF-e data)."
     columns:
-      - name: fiscal_invoice_pk
+      - name: fiscal_invoices_pk
         description: "Primary key of the fiscal invoices table."
         tests:
           - unique

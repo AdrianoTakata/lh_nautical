@@ -1,5 +1,5 @@
 sources:
-  - name: slq_server
+  - name: sql_server
     description: Essas são as tabelas extraidas no banco SQL Server
     schema: bronze
     tables:

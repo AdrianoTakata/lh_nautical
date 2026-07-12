@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_order_items
+    description: "Staging table containing cleaned and standardized line items for sales/purchase orders."
+    columns:
+      - name: order_item_pk
+        description: "Primary key of the order items table."
+        tests:
+          - unique
+          - not_null
+
+      - name: order_fk
+        description: "Foreign key linking to the parent order header."
+        tests:
+          - not_null
+          # Relationship test example (if you have stg_orders)
+          - relationships:
+            to: ref('stg_orders')
+            field: order_fk
+
+      - name: product_variant_fk
+        description: "Foreign key linking to the specific product variant item."
+        tests:
+          - not_null
+          # Relationship test example (if you have stg_product_variant)
+          - relationships:
+            to: ref('stg_product_variant')
+            field: product_variant_fk
+
+      - name: quantity
+        description: "The number of units ordered for this specific item line."
+        tests:
+          - not_null
+
+      - name: unit_price
+        description: "The price per single unit of the product variant."
+        tests:
+          - not_null
+
+      - name: line_total
+        description: "The calculated total amount for this line item (usually quantity * unit_price + taxes)."
+        tests:
+          - not_null

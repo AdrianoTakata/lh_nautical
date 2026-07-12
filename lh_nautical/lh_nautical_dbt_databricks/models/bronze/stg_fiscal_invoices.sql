@@ -1,7 +1,7 @@
 with
     fiscal_invoices as (
         select *
-        from {{ source('slq_server', 'fiscal_invoices') }}
+        from {{ source('sql_server', 'fiscal_invoices') }}
     )
 
     , renamed as (
@@ -17,6 +17,11 @@ with
             , cast(xml_storage_uri as string) as fiscal_xml_storage_uri
             , cast(created_at as timestamp) as fiscal_created_at_fiscal
             , cast(updated_at as timestamp) as fiscal_updated_at
+
+            -- internal ingestion metadata
+            , cast(_hash as string) as ingestion_hash,
+            , cast(_ingested_at as timestamp) as ingested_at,
+            , cast(_action as string) as ingestion_action
 
         from fiscal_invoices
     )

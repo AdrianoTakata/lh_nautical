@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_locations
+    description: "Staging table containing cleaned and standardized physical location data (stores and warehouses)."
+    columns:
+      - name: location_pk
+        description: "Primary key of the locations table."
+        tests:
+          - unique
+          - not_null
+
+      - name: location_name
+        description: "The commercial or internal name of the location."
+        tests:
+          - not_null
+
+      - name: location_type
+        description: "The categorization of the location (e.g., store, warehouse)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['store', 'warehouse']
+
+      - name: is_active
+        description: "Flag indicating whether the location is currently operational."
+        tests:
+          - not_null
