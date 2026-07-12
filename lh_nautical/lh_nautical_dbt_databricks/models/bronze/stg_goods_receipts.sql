@@ -1,7 +1,7 @@
 with
-    goods_receipt as (
+    goods_receipts as (
         select *
-        from {{ source('sql_server','goods_receipt') }}
+        from {{ source('sql_server','goods_receipts') }}
     )
 
     , renamed as (
@@ -14,9 +14,9 @@ with
             , cast(created_at as timestamp) as goods_receipt_created_at
 
             -- internal ingestion metadata
-            cast(_hash as string) as _order_hash,
-            cast(_ingested_at as timestamp) as _order_ingested_at,
-            cast(_action as string) as _order_action
+            , cast(_hash as string) as _goods_receipt_hash
+            , cast(_ingested_at as timestamp) as _goods_receipt_ingested_at
+            , cast(_action as string) as _goods_receipt_action
         from goods_receipt
     )
 

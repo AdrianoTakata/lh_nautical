@@ -12,9 +12,9 @@ with
             , cast(quantity_received as decimal(14,3)) as goods_receipt_item_quantity_received
 
             -- internal ingestion metadata
-            cast(_hash as string) as _order_hash,
-            cast(_ingested_at as timestamp) as _order_ingested_at,
-            cast(_action as string) as _order_action
+            , cast(_hash as string) as _goods_receipt_item_hash
+            , cast(_ingested_at as timestamp) as _goods_receipt_item_ingested_at
+            , cast(_action as string) as _goods_receipt_item_action
         from goods_receipt_items
     )
 

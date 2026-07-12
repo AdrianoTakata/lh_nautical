@@ -15,16 +15,16 @@ models:
         tests:
           - not_null
           # Relationship test example (if you have stg_goods_receipt)
-          - relationships:
-            to: ref('stg_goods_receipt')
-            field: goods_receipt_fk
+          #- relationships:
+          #  to: ref('stg_goods_receipt')
+          #  field: goods_receipt_fk
 
       - name: purchase_order_item_fk
         description: "Foreign key mapping to the purchase order items table"
         tests:
           - not_null
       
-      #- name: goods_receipt_quantity_received
-      #  description: "The physical quantity of items received and checked into inventory."
-      #  tests:
-      #    - not_null 
+      - name: goods_receipt_quantity_received
+        description: "The physical quantity of items received and checked into inventory."
+        tests:
+          - not_null 

@@ -11,7 +11,7 @@ models:
           - not_null
 
       - name: order_number
-        description: "The human-readable unique identifier for the order (e.g., SO-025001)."
+        description: "The human-readable unique identifier for the order."
         tests:
           - unique
           - not_null

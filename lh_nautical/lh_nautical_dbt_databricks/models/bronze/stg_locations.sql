@@ -22,9 +22,9 @@ with
             , cast(updated_at as timestamp) as location_updated_at
 
             -- internal ingestion metadata
-            cast(_hash as string) as _order_hash,
-            cast(_ingested_at as timestamp) as _order_ingested_at,
-            cast(_action as string) as _order_action
+            , cast(_hash as string) as _location_hash
+            , cast(_ingested_at as timestamp) as _location_ingested_at
+            , cast(_action as string) as _location_action
         from locations
     )
 

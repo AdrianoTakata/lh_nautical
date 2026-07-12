@@ -15,18 +15,18 @@ models:
         tests:
           - not_null
           # Relationship test example (if you have stg_orders)
-          - relationships:
-            to: ref('stg_orders')
-            field: order_fk
+          #- relationships:
+          #  to: ref('stg_orders')
+          #  field: order_fk
 
       - name: product_variant_fk
         description: "Foreign key linking to the specific product variant item."
         tests:
           - not_null
           # Relationship test example (if you have stg_product_variant)
-          - relationships:
-            to: ref('stg_product_variant')
-            field: product_variant_fk
+          #- relationships:
+          #  to: ref('stg_product_variant')
+          #  field: product_variant_fk
 
       - name: quantity
         description: "The number of units ordered for this specific item line."

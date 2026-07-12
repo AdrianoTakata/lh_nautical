@@ -19,9 +19,9 @@ with
             , cast(updated_at as timestamp) as fiscal_updated_at
 
             -- internal ingestion metadata
-            , cast(_hash as string) as ingestion_hash,
-            , cast(_ingested_at as timestamp) as ingested_at,
-            , cast(_action as string) as ingestion_action
+            , cast(_hash as string) as _fiscal_hash
+            , cast(_ingested_at as timestamp) as _fiscal_ingested_at
+            , cast(_action as string) as _fiscal_action
 
         from fiscal_invoices
     )
