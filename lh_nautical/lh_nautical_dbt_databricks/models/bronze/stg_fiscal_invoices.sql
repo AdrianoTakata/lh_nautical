@@ -6,8 +6,8 @@ with
 
     , renamed as (
         select
-            cast(id as int) as fiscal_invoices_id
-            , cast(order_id as int)
+            cast(id as int) as fiscal_invoices_pk
+            , cast(order_id as int) as order_fk
             , cast(nfe_number as string) as fiscal_nfe_number
             , cast(nfe_access_key as string) as fiscal_nfe_access_key
             , cast(series as string) as fiscal_series

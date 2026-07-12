@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_goods_receipt_items
+    description: "Staging table containing cleaned and standardized items from goods receipts."
+    columns:
+      - name: goods_receipt_item_pk
+        description: "Primary key of the goods_receipt_items table."
+        tests:
+          - unique
+          - not_null
+
+      - name: goods_receipt_fk
+        description: "Foreign key mapping to the goods receipt table."
+        tests:
+          - not_null
+
+      - name: purchase_order_item_fk
+        description: "Foreign key mapping to the purchase order items table"
+        tests:
+          - not_null
+      
+      #- name: goods_receipt_quantity_received
+      #  description: "The physical quantity of items received and checked into inventory."
+      #  tests:
+      #    - not_null 
