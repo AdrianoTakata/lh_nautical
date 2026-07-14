@@ -40,11 +40,11 @@ models:
           - accepted_values:
               values: ['paid', 'confirmed', 'draft', 'cancelled']
 
-      - name: total_amount
+      - name: order_total_amount
         description: "The final total amount of the order after discounts."
         tests:
           - not_null
 
-      - name: placed_at
+      - name: order_placed_at
         tests:
           - not_null

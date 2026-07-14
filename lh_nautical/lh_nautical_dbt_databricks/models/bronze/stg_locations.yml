@@ -22,7 +22,7 @@ models:
           - accepted_values:
               values: ['store', 'warehouse']
 
-      - name: is_active
+      - name: location_is_active
         description: "Flag indicating whether the location is currently operational."
         tests:
           - not_null

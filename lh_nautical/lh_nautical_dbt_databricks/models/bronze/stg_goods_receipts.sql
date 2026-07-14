@@ -17,7 +17,7 @@ with
             , cast(_hash as string) as _goods_receipt_hash
             , cast(_ingested_at as timestamp) as _goods_receipt_ingested_at
             , cast(_action as string) as _goods_receipt_action
-        from goods_receipt
+        from goods_receipts
     )
 
 select *

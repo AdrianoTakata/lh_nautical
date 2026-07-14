@@ -24,7 +24,7 @@ models:
         tests:
           - not_null
       
-      - name: goods_receipt_quantity_received
+      - name: goods_receipt_item_quantity_received
         description: "The physical quantity of items received and checked into inventory."
         tests:
           - not_null 

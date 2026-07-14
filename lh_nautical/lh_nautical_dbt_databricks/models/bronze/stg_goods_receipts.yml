@@ -28,7 +28,7 @@ models:
           #     to: ref('stg_received_by_employee')
           #     field: received_by_employee_pk
 
-      - name: received_at
+      - name: goods_receipt_received_at
         description: "The timestamp when the goods were physically received."
         tests:
           - not_null

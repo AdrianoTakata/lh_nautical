@@ -30,7 +30,7 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['authorized', 'rejected', 'canceled'] # There are 3 status in table
+              values: ['authorized', 'rejected', 'cancelled'] # There are 3 status in table
 
       - name: fiscal_total_amount
         description: "The total monetary value of the fiscal invoice."

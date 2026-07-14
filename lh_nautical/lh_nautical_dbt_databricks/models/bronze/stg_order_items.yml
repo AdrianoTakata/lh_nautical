@@ -28,17 +28,17 @@ models:
           #  to: ref('stg_product_variant')
           #  field: product_variant_fk
 
-      - name: quantity
+      - name: order_item_quantity
         description: "The number of units ordered for this specific item line."
         tests:
           - not_null
 
-      - name: unit_price
+      - name: order_item_unit_price
         description: "The price per single unit of the product variant."
         tests:
           - not_null
 
-      - name: line_total
+      - name: order_item_line_total
         description: "The calculated total amount for this line item (usually quantity * unit_price + taxes)."
         tests:
           - not_null
