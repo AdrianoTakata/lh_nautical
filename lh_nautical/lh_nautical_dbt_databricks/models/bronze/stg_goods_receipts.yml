@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_goods_receipts
+    description: "Staging table containing cleaned and standardized records of goods receipts table"
+    columns:
+      - name: goods_receipt_pk
+        description: "Primary key of the goods receipts table."
+        tests:
+          - unique
+          - not_null
+
+      - name: purchase_order_fk
+        description: "Foreign key linking to the original purchase order."
+        tests:
+          - not_null
+          # Relationship test example (if you have stg_purchase_order)
+          # - relationships:
+          #     to: ref('stg_purchase_orders')
+          #     field: purchase_order_pk
+
+      - name: received_by_employee_fk
+        description: "Foreign key identifying the employee who received and processed the goods."
+        tests:
+          - not_null
+          # Relationship test example (if you have stg_received_by_employee)
+          # - relationships:
+          #     to: ref('stg_received_by_employee')
+          #     field: received_by_employee_pk
+
+      - name: received_at
+        description: "The timestamp when the goods were physically received."
+        tests:
+          - not_null

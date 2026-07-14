@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Staging table containing cleaned and standardized customer orders header data."
+    columns:
+      - name: order_pk
+        description: "Primary key of the orders table."
+        tests:
+          - unique
+          - not_null
+
+      - name: order_number
+        description: "The human-readable unique identifier for the order."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_fk
+        description: "Foreign key linking to the customer who placed the order."
+        tests:
+          - not_null
+
+      - name: location_fk
+        description: "Foreign key linking to the physical or virtual warehouse/store location."
+        tests:
+          - not_null
+
+      - name: order_channel
+        description: "The sales channel where the order originated (e.g., ecommerce, pos)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['ecommerce', 'pos']
+
+      - name: order_status
+        description: "The current lifecycle status of the order."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['paid', 'confirmed', 'draft', 'cancelled']
+
+      - name: total_amount
+        description: "The final total amount of the order after discounts."
+        tests:
+          - not_null
+
+      - name: placed_at
+        tests:
+          - not_null

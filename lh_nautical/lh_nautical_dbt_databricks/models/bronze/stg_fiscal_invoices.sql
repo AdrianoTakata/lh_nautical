@@ -1,13 +1,13 @@
 with
     fiscal_invoices as (
         select *
-        from {{ source('slq_server', 'fiscal_invoices') }}
+        from {{ source('sql_server', 'fiscal_invoices') }}
     )
 
     , renamed as (
         select
-            cast(id as int) as fiscal_invoices_id
-            , cast(order_id as int)
+            cast(id as int) as fiscal_invoices_pk
+            , cast(order_id as int) as order_fk
             , cast(nfe_number as string) as fiscal_nfe_number
             , cast(nfe_access_key as string) as fiscal_nfe_access_key
             , cast(series as string) as fiscal_series
@@ -17,6 +17,11 @@ with
             , cast(xml_storage_uri as string) as fiscal_xml_storage_uri
             , cast(created_at as timestamp) as fiscal_created_at_fiscal
             , cast(updated_at as timestamp) as fiscal_updated_at
+
+            -- internal ingestion metadata
+            , cast(_hash as string) as _fiscal_hash
+            , cast(_ingested_at as timestamp) as _fiscal_ingested_at
+            , cast(_action as string) as _fiscal_action
 
         from fiscal_invoices
     )

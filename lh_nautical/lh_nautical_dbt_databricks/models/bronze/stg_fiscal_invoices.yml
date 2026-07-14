@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_fiscal_invoices
+    description: "Staging table containing cleaned and standardized electronic fiscal invoices table (NF-e data)."
+    columns:
+      - name: fiscal_invoices_pk
+        description: "Primary key of the fiscal invoices table."
+        tests:
+          - unique
+          - not_null
+
+      - name: order_fk
+        description: "Foreign key mapping to the orders table."
+        tests:
+          - not_null
+          # Relationship test example (if you have stg_orders)
+          # - relationships:
+          #     to: ref('stg_orders')
+          #     field: order_id
+
+      - name: fiscal_nfe_access_key
+        description: "The unique 44-digit access key of the electronic fiscal invoice."
+        tests:
+          - unique
+          - not_null
+
+      - name: fiscal_status
+        description: "The current status of the fiscal invoice."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['authorized', 'rejected', 'canceled'] # There are 3 status in table
+
+      - name: fiscal_total_amount
+        description: "The total monetary value of the fiscal invoice."
+        tests:
+          - not_null
